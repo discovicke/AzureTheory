@@ -1,11 +1,10 @@
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Azure.Storage.Blobs;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var connectionString = builder.Configuration.GetConnectionString(
-    "AzureStorage"
-); //lägg till
+var connectionString = builder.Configuration.GetConnectionString("AzureStorage");
 
 builder.Services.AddSingleton(new BlobServiceClient(connectionString));
 
@@ -14,25 +13,28 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.MapGet("/upload/{id}", async (BlobServiceClient blobServiceClient, string id) =>
+app.MapGet("/upload/{id}", async (BlobServiceClient blobClient, string id) =>
 {
-    var blobClient = blobServiceClient.GetBlobContainerClient(id);
+    // använd samma namn som upload container 
+    var containerName = "useruploads";
+    var containerClient = blobClient.GetBlobContainerClient(containerName);
 
-    if (!await blobClient.ExistsAsync())
+    if (!await containerClient.ExistsAsync())
     {
         return Results.NotFound();
     }
 
-    var response = await blobClient.DownloadAsync();
+    // id här är blob namnet
+    var blobClientForDownload = containerClient.GetBlobClient(id);
+    if (!await blobClientForDownload.ExistsAsync())
+    {
+        return Results.NotFound();
+    }
 
-    var contentType = response.Value.Details.ContentType ?? "application/octet-stream";
+    var (contentStream, contentType) = await DownloadBlobAsync(blobClientForDownload);
 
-
-
-    return Results.File(response.Value.Content, contentType, id);
-
+    return Results.File(contentStream, contentType, id);
 });
-
 app.MapPost(
     "/upload",
     async (BlobServiceClient blobServiceClient, IFormFile file) =>
@@ -57,3 +59,19 @@ app.MapPost(
     }
 );
 app.Run();
+
+static async Task<(Stream Content, string ContentType)> DownloadBlobAsync(BlobClient blobClient)
+{
+    var response = await blobClient.DownloadStreamingAsync();
+    var contentType = response.Value.Details.ContentType ?? "application/octet-stream";
+    return (response.Value.Content, contentType);
+}
+
+static BlobServiceClient GetBlobServiceClient(string accountName)
+{
+    BlobServiceClient client = new(
+        new Uri($"https://{accountName}.blob.core.windows.net"),
+        new DefaultAzureCredential());
+
+    return client;
+}
