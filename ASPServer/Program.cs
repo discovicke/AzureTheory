@@ -14,7 +14,24 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/upload/{id}", async (BlobServiceClient blobServiceClient, string id) =>
+{
+    var blobClient = blobServiceClient.GetBlobContainerClient(id);
+
+    if (!await blobClient.ExistsAsync())
+    {
+        return Results.NotFound();
+    }
+
+    var response = await blobClient.DownloadAsync();
+
+    var contentType = response.Value.Details.ContentType ?? "application/octet-stream";
+
+
+
+    return Results.File(response.Value.Content, contentType, id);
+
+});
 
 app.MapPost(
     "/upload",
@@ -39,5 +56,4 @@ app.MapPost(
         return Results.Ok(new { blobName });
     }
 );
-
 app.Run();
