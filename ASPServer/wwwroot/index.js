@@ -1,9 +1,9 @@
-const input = document.getElementsById("input");
+const input = document.getElementById('input');
 
 async function UploadAsync() {
     try {
-
         const file = input.file[0];
+        console.log(file);
 
         if (!file) {
             return;
@@ -24,7 +24,7 @@ async function UploadAsync() {
         const data = await response.json();
          
     } catch (error) {
-        console.error("Fel!");
+        console.error("Fel!" + error);
     }
 }
 
