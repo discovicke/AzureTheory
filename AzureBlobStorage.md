@@ -15,3 +15,5 @@ Innan du går in i lagret måste du förstå hierarkin. Det är inte bara en sto
 Inuti ditt konto skapar du "Containers". Tänk på det som olika rum i lagret – ett för "Bilder", ett för "Loggar", och ett för "Menyer". Du kan ha olika säkerhetsregler för olika rum (t.ex. att "Meny-rummet" är öppet för alla, men "Kvitto-rummet" är låst).
 
 - *Blob* (Själva råvaran): Detta är den enskilda filen, t.ex. kalle_anka_profilbild.jpg.
+
+![new blob.png](new%20blob.png)
