@@ -30,6 +30,24 @@ async function UploadAsync() {
 
 async function DownloadAsync() {
     //TODO : skriv!
+    try {
+        const response = await fetch('/download/{id}', {
+            method: 'GET'
+        });
+        if (!response.ok) {
+            throw new Error('Fel');
+        }
+        const blob = await response.blob();
+        
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'filnamn.ext';
+        a.click();
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("Fel!");
+    }
 }
 
 async function PreviewImgage() {
