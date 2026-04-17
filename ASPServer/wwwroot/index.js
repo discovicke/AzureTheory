@@ -2,7 +2,7 @@ const input = document.getElementById('input');
 
 async function UploadAsync() {
     try {
-        const file = input.file[0];
+        const file = input.files[0];
         console.log(file);
 
         if (!file) {
@@ -12,7 +12,7 @@ async function UploadAsync() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch('/upload/{id}', {
+        const response = await fetch('/upload', {
             method: 'POST',
             body: formData
         });

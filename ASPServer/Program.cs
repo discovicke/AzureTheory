@@ -7,14 +7,18 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AzureStorage");
 
 builder.Services.AddSingleton(new BlobServiceClient(connectionString));
+builder.Services.AddAntiforgery();
 
 var app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+app.UseAntiforgery();
+
 app.MapGet("/upload/{id}", async (BlobServiceClient blobClient, string id) =>
 {
+    Console.WriteLine($"Received request for blob with id: {id}");
     // använd samma namn som upload container 
     var containerName = "useruploads";
     var containerClient = blobClient.GetBlobContainerClient(containerName);
@@ -33,12 +37,13 @@ app.MapGet("/upload/{id}", async (BlobServiceClient blobClient, string id) =>
 
     var (contentStream, contentType) = await DownloadBlobAsync(blobClientForDownload);
 
-    return Results.File(contentStream, contentType, id);
+    return Results.Ok(new { contentStream, contentType, id });
 });
 app.MapPost(
     "/upload",
     async (BlobServiceClient blobServiceClient, IFormFile file) =>
     {
+        Console.WriteLine($"Received file: {file.FileName}, size: {file.Length} bytes");
         if (file == null || file.Length == 0)
         {
             return Results.BadRequest("No file");
@@ -57,7 +62,8 @@ app.MapPost(
 
         return Results.Ok(new { blobName });
     }
-);
+).DisableAntiforgery();
+
 app.Run();
 
 static async Task<(Stream Content, string ContentType)> DownloadBlobAsync(BlobClient blobClient)
