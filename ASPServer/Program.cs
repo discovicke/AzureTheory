@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Azure.Storage.Blobs;
 using Azure.Identity;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AzureStorage");
@@ -34,10 +35,14 @@ app.MapGet("/upload/{id}", async (BlobServiceClient blobClient, string id) =>
     {
         return Results.NotFound();
     }
+    var (contentStream, _) = await DownloadBlobAsync(blobClientForDownload);
 
-    var (contentStream, contentType) = await DownloadBlobAsync(blobClientForDownload);
+    
+    var provider = new FileExtensionContentTypeProvider();
+    provider.TryGetContentType(id, out var contentType);
+    contentType ??= "application/octet-stream";
 
-    return Results.Ok(new { contentStream, contentType, id });
+    return Results.File(contentStream, contentType);
 });
 app.MapPost(
     "/upload",
