@@ -29,7 +29,6 @@ async function UploadAsync() {
 }
 
 async function DownloadAsync() {
-    //TODO : skriv!
     try {
         const response = await fetch('/download/{id}', {
             method: 'GET'
@@ -50,6 +49,3 @@ async function DownloadAsync() {
     }
 }
 
-async function PreviewImgage() {
-    //TODO : skriv!
-}
