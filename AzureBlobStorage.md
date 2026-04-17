@@ -1,3 +1,26 @@
+# Innan du kan börja skriva kod som faktiskt pratar med Azure, behöver du din Connection String. Den hittar du i Azure Portal:
+[ Länk till Azure Portal](https://portal.azure.com/) 
+
+Gå till ditt Storage Account.
+
+Leta efter Access keys i menyn till vänster.
+
+Klicka på Show vid "Connection string" och kopiera den.
+
+**Varning :** Dela aldrig den strängen på GitHub eller med någon annan – det är huvudnyckeln till hela ditt lager!
+Vill du ha ett enkelt kodexempel på hur du laddar upp en textsträng som en fil till din container?
+
+## För att kommaigång med Azure blob storage
+- installera nuget package för.
+- *i Vs Code* i terminalen kör  dotnet add package Azure.Storage.Blobs
+- *i visual studio* ![Nuget guide.png](Nuget%20guide.png)
+- *Kolla i .csproj filen* 
+    <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.xx.x" />
+    </ItemGroup>
+- *i program.cs* Lägg till *using* högst upp *using Azure.Storage.Blobs;*.
+
+
 Azure Blob Storage är en Microsoft tjänst för att lagra objekt i molnet. Det är optimerat för att lagra stora mängder av ostrukterad data, och passar bra för att lagra exempelvis bilder, dokument, videor och loggfiler. Blob Storage hanterar alla typer av binär data (en BLOB = Binary Large Object).
 
 Blob Storage kan leverera bilder eller dokument direkt till webbläsaren och passar exempelvis bra när man vill streama video/ljud, lagra säkerhetskopior, analysdata och data för molnappar. En användare eller klientprogram kan komma åt objekt i Blob Storage via HTTP/HTTPS-anrop. Objekten i Blob Storage är tillgängliga via Azure Storage REST API, Azure PowerShell, Azure CLI eller ett Azure Storage klientbibliotek, vilka finns tillgängliga för flera olika programmeringsspråk, bland annat för .NET.
