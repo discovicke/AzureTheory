@@ -33,9 +33,9 @@ Klicka på Show vid "Connection string" och kopiera den.
 **Varning :** Dela aldrig den strängen på GitHub eller med någon annan – det är huvudnyckeln till hela ditt lager!
 Vill du ha ett enkelt kodexempel på hur du laddar upp en textsträng som en fil till din container?
 
-## För att kommaigång med Azure blob storage
+## För att komma igång med Azure blob storage
 - installera nuget package för.
-- *i Vs Code* i terminalen kör  dotnet add package Azure.Storage.Blobs
+- *i Vs Code* i terminalen kör dotnet add package Azure.Storage.Blobs
 - *i visual studio* ![Nuget guide.png](Nuget%20guide.png)
 - *Kolla i .csproj filen* 
     <ItemGroup>
@@ -72,12 +72,3 @@ Tyck på Add Container i container vyn och fyll i namnet, se till att komma ihå
 När det är klart är det enda kvar att se till att man hittar Access Keys menyn (återigen på vänstra panelen) när dess information väl behövs så hittar man det, speciellt ConnectionString:
 OBS: Du kan ta från Key1 och Key2, spelar ingen roll.
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3026053d-2460-4e78-a1c9-c6540cab25ae" />
-
-## Installera paket i .NET
-
-För att använda Azure Storage Blobs i .NET behöver du först installera paket och lägga till en using för Azure.Storage.Blobs.
-
-```bash
-dotnet add package Azure.Storage.Blobs
-```
-
