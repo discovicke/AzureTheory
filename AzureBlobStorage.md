@@ -17,3 +17,37 @@ Inuti ditt konto skapar du "Containers". Tänk på det som olika rum i lagret �
 - *Blob* (Själva råvaran): Detta är den enskilda filen, t.ex. kalle_anka_profilbild.jpg.
 
 ![new blob.png](new%20blob.png)
+
+
+
+---
+
+## Hur man får igång Blob Storage på Azure Portal
+
+Gå in på portalen och sök efter "Storage Account" (INTE classic), klicka in på det.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/110a203b-8613-4cc2-98d1-c6a5b9f6a62b" />
+
+Klicka på "Create":
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/70bbfe6f-49bc-492b-a1cf-d6eb7fd9260a" />
+
+Fyll i informationen, här är det jag rekommenderar. (OBS: om något av alternativen är otydliga går det att hålla musen över "info box" symbolen på höger om titeln för fältet, så finns det en läs mer länk att utforska.
+
+<img width="1920" height="1165" alt="screencapture-portal-azure-2026-04-17-10_59_32" src="https://github.com/user-attachments/assets/5ac40773-331e-45a2-8552-a10869cc77f0" />
+
+Efter det så klicka review + create och sen create igen. Klart med detta steg.
+
+### Skapa en container i din Blob Storage
+Next up är att skapa en container inuti din blob storage.
+
+Gå tillbaka till startsidan och klicka in på din nyskapta blob storage.
+
+Kolla efter "containers" i vänstra panelen och tryck in där:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df4767b4-e929-42de-80f0-835f5e3a7c73" />
+
+Tyck på Add Container i container vyn och fyll i namnet, se till att komma ihåg det till senare då man behöver referera till det i koden:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fd0e4f88-1bbb-416c-b613-2faaec7f30e8" />
+
+När det är klart är det enda kvar att se till att man hittar Access Keys menyn (återigen på vänstra panelen) när dess information väl behövs så hittar man det, speciellt ConnectionString:
+OBS: Du kan ta från Key1 och Key2, spelar ingen roll.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3026053d-2460-4e78-a1c9-c6540cab25ae" />
+
