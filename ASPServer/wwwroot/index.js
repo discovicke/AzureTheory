@@ -28,6 +28,10 @@ async function UploadAsync() {
     }
 }
 
-async function GetImage() {
+async function DownloadAsync() {
+    //TODO : skriv!
+}
 
+async function PreviewImgage() {
+    //TODO : skriv!
 }
