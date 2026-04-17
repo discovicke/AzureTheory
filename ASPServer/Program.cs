@@ -54,8 +54,9 @@ app.MapPost(
             return Results.BadRequest("No file");
         }
 
+        var Guid = System.Guid.NewGuid().ToString();
         var containerName = "useruploads"; //lägg till!
-        var blobName = file.FileName;
+        var blobName = Guid + "_" + file.FileName;
 
         var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
         await containerClient.CreateIfNotExistsAsync();

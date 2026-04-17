@@ -22,6 +22,8 @@ async function UploadAsync() {
         }
 
         const data = await response.json();
+        ShowUrl(data.blobName);
+
          
     } catch (error) {
         console.error("Fel!" + error);
@@ -30,7 +32,7 @@ async function UploadAsync() {
 
 async function DownloadAsync() {
     try {
-        const response = await fetch('/download/{id}', {
+        const response = await fetch('/upload/{id}', {
             method: 'GET'
         });
         if (!response.ok) {
@@ -44,8 +46,20 @@ async function DownloadAsync() {
         a.download = 'filnamn.ext';
         a.click();
         URL.revokeObjectURL(url);
+
+      
     } catch (error) {
         console.error("Fel!");
     }
 }
 
+function ShowUrl(blobName) {
+    const url = `${window.location.origin}/upload/${encodeURIComponent(blobName)}`;
+
+    const p = document.createElement('p');
+    p.textContent = url;
+
+    document.body.appendChild(p);
+}
+
+// add method that creates a simple a tag to the page with the link to the file instead of downloading it
