@@ -9,6 +9,9 @@ builder.Services.AddSingleton(new BlobServiceClient(connectionString));
 
 var app = builder.Build();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapGet("/", () => "Hello World!");
 
 app.MapPost("/upload", async (BlobServiceClient blobServiceClient, IFormFile file) =>
