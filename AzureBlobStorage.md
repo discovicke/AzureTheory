@@ -9,7 +9,7 @@ Om vi tänker att  din kod i Program.cs är kocken som bestämmer vad som ska se
 För att förstå mer hur strukturen ser så kan vi tänka på, Om Blob Storage är det stora externa lagret, behöver vi ett system för att hitta rätt hylla och rätt låda. 
 Innan du går in i lagret måste du förstå hierarkin. Det är inte bara en stor hög med saker, utan det är uppdelat i tre nivåer
 
-- *Storage account* (Restaurangkedjan) Detta är själva kontot i Azure. Det är     paraplyet för allt ditt lagringsutrymme.
+- *Storage account* (Restaurangkedjan) Detta är själva kontot i Azure. Det är paraplyet för allt ditt lagringsutrymme.
 
 - *Container* (Rummet/Kylen) 
 Inuti ditt konto skapar du "Containers". Tänk på det som olika rum i lagret – ett för "Bilder", ett för "Loggar", och ett för "Menyer". Du kan ha olika säkerhetsregler för olika rum (t.ex. att "Meny-rummet" är öppet för alla, men "Kvitto-rummet" är låst).
@@ -21,8 +21,9 @@ Inuti ditt konto skapar du "Containers". Tänk på det som olika rum i lagret �
 
 
 ---
-## Innan du kan börja skriva kod som faktiskt pratar med Azure, behöver du din Connection String. Den hittar du i Azure Portal:
-[ Länk till Azure Portal](https://portal.azure.com/) 
+### Innan du kan börja skriva kod som faktiskt pratar med Azure, behöver du din Connection String. 
+
+Du hittar den i Azure Portal: [ Länk till Azure Portal](https://portal.azure.com/) 
 
 Gå till ditt Storage Account.
 
@@ -30,18 +31,18 @@ Leta efter Access keys i menyn till vänster.
 
 Klicka på Show vid "Connection string" och kopiera den.
 
-**Varning :** Dela aldrig den strängen på GitHub eller med någon annan – det är huvudnyckeln till hela ditt lager!
-Vill du ha ett enkelt kodexempel på hur du laddar upp en textsträng som en fil till din container?
+**Varning :** Dela aldrig den strängen på GitHub eller med någon annan, det är huvudnyckeln till hela ditt lager!
 
 ## För att komma igång med Azure blob storage
-- installera nuget package för.
-- *i Vs Code* i terminalen kör dotnet add package Azure.Storage.Blobs
-- *i visual studio* ![Nuget guide.png](Nuget%20guide.png)
-- *Kolla i .csproj filen* 
-    <ItemGroup>
+- Installera nuget package för Azure Blob Storage.
+    - Öppna terminalen i projektet och kör `dotnet add package Azure.Storage.Blobs`.
+    - I Visual Studio:  
+![Nuget guide.png](Nuget%20guide.png)
+- Detta bör finnas i .cs-proj-filen:   
+    `<ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.xx.x" />
-    </ItemGroup>
-- *i program.cs* Lägg till *using* högst upp *using Azure.Storage.Blobs;*.
+    </ItemGroup>`
+- **Program.cs**: Lägg till *using* högst upp: `using Azure.Storage.Blobs;`.
 
 
 ## Hur man får igång Blob Storage på Azure Portal
