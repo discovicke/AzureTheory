@@ -3,8 +3,8 @@ using Azure.Storage.Blobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration(
-    "DefaultEndpointsProtocol=https;AccountName=blobtester;AccountKey=FtFjO9g0WEV8SOJyI0rN5kZ5t2uRBTNRelbgNzCDJ0OW1Mk2jSMQz5aO+85I91KDl6ud8f75/pn7+AStrpzbKQ==;EndpointSuffix=core.windows.net"
+var connectionString = builder.Configuration.GetConnectionString(
+    "AzureStorage"
 ); //lägg till
 
 builder.Services.AddSingleton(new BlobServiceClient(connectionString));
