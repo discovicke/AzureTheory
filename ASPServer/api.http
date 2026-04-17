@@ -1,0 +1,21 @@
+@host = http://localhost:5211
+@blobName = test.txt
+
+### Notes
+# Start the app before running these requests.
+# The upload request will only work if the /upload endpoint has antiforgery disabled
+# or if you add a valid antiforgery token to the request.
+
+### Upload sample text file
+POST {{host}}/upload
+Content-Type: multipart/form-data; boundary=UploadBoundary
+
+--UploadBoundary
+Content-Disposition: form-data; name="file"; filename="sample.txt"
+Content-Type: text/plain
+
+Hello from api.http
+--UploadBoundary--
+
+### Download blob by name
+GET {{host}}/upload/{{blobName}}
